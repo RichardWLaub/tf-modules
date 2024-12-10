@@ -12,7 +12,8 @@ resource "aws_cloudfront_distribution" "app_distribution" {
   is_ipv6_enabled     = true
   default_root_object = var.default_root_object
 
-  aliases = ["${var.subdomain}.${var.domain_name}"]
+  aliases = ["${var.subdomain == "" ? var.domain_name : "${var.subdomain}.${var.domain_name}"}"]
+
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
